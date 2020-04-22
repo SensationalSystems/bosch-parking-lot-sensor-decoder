@@ -23,10 +23,10 @@ function Decoder(bytes, port) {
     // Bytes 0 - 11 are debug info
     decoded.debug = bytes.slice(0, 12);
     
-    // Bytes 12 - 12 are firmware version, convert to string
+    // Bytes 12 - 14 are firmware version, convert to string
     decoded.firmware_version = bytes[12] + '.' + bytes[13] + '.' + bytes[14];
     
-    // Byte 15 is the reset reason, conver to string
+    // Byte 15 is the reset reason, convert to string
     decoded.reset_reason = 0;
     
     switch (bytes[15]) {
@@ -35,7 +35,7 @@ function Decoder(bytes, port) {
       case 2: decoded.reset_reason = "Power On";
               break;
       case 3: decoded.reset_reason = "System Request";
-             break;
+              break;
       case 4: decoded.reset_reason = "Other";
               break;
       default: decoded.reset_reason = "Unknown";
